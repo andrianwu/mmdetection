@@ -23,6 +23,9 @@ RUN rm -f /etc/apt/sources.list.d/cuda.list \
 #    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 # Install the required packages
+ENV TZ=Etc/UTC \
+    DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update \
     && apt-get install -y ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libsm6 libxrender-dev libxext6 \
     && apt-get clean \
