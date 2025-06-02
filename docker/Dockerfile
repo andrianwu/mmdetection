@@ -1,5 +1,5 @@
-ARG PYTORCH="1.9.0"
-ARG CUDA="11.1"
+ARG PYTORCH="2.1.0"
+ARG CUDA="12.1"
 ARG CUDNN="8"
 
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
@@ -11,11 +11,12 @@ ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5 8.0 8.6+PTX" \
 
 # Avoid Public GPG key error
 # https://github.com/NVIDIA/nvidia-docker/issues/1631
-RUN rm /etc/apt/sources.list.d/cuda.list \
-    && rm /etc/apt/sources.list.d/nvidia-ml.list \
-    && apt-key del 7fa2af80 \
+RUN rm -f /etc/apt/sources.list.d/cuda.list \
+    && rm -f /etc/apt/sources.list.d/nvidia-ml.list \
+    && apt-key del 7fa2af80 || true \
     && apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub \
     && apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/7fa2af80.pub
+
 
 # (Optional, use Mirror to speed up downloads)
 # RUN sed -i 's/http:\/\/archive.ubuntu.com\/ubuntu\//http:\/\/mirrors.aliyun.com\/ubuntu\//g' /etc/apt/sources.list && \
