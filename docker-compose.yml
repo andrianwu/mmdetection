@@ -1,9 +1,8 @@
-version: '3.8'
-
 services:
   mmdetection:
     build:
       context: .
+      dockerfile: docker/Dockerfile
       args:
         PYTORCH: "2.7.0"
         CUDA: "12.8"
