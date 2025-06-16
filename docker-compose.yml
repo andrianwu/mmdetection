@@ -1,6 +1,6 @@
 services:
   mmdetection:
-    image: mmdetection  
+    image: mmdetection
     build:
       context: .
       dockerfile: docker/Dockerfile
@@ -14,8 +14,10 @@ services:
     stdin_open: true
     volumes:
       - /home/andrian/envs/mmdet/mmdetection/data/coco:/mmdetection/data/coco
-      - ./configs:/mmdetection/configs  # Optional: for custom configs
-      - ./work_dirs:/mmdetection/work_dirs  # Optional: to persist training outputs
+      - ./configs:/mmdetection/configs
+      - ./work_dirs:/mmdetection/work_dirs
+      - ./mmpose:/mmpose 
+      - /home/andrian/envs/mmdet/mmpose/data:/mmpose/data  # Mount MMPose keypoint data
     environment:
       - TORCH_CUDA_ARCH_LIST=6.0 6.1 7.0 7.5 8.0 8.6 9.0+PTX
       - TORCH_NVCC_FLAGS=-Xfatbin -compress-all
