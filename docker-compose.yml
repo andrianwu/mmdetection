@@ -1,6 +1,6 @@
 services:
   mmdetection:
-    image: mmdetection
+    image: mmdet_mmpose
     build:
       context: .
       dockerfile: docker/Dockerfile
